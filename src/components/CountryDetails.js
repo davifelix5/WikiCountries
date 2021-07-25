@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom'
 
 import api from '../services/api'
 
-export default function CountryDetails() {
+export default function CountryDetails({ setActiveCountryCode }) {
 
   const { code } = useParams()
   
@@ -14,6 +14,7 @@ export default function CountryDetails() {
 
   useEffect(() => {
     setLoading(true)
+    setActiveCountryCode(code)
     async function fetchData() {
       const countryRes = await api.get(`/alpha/${code}`)
       setCountry(countryRes.data)
@@ -28,7 +29,7 @@ export default function CountryDetails() {
       setLoading(false)
     }
     fetchData()
-  }, [code, setCountry, setBorders, setLoading])
+  }, [code, setCountry, setBorders, setLoading, setActiveCountryCode])
 
   if (loading) {
     return <div className="spinner-border" role="status" />
@@ -40,6 +41,10 @@ export default function CountryDetails() {
             <table className="table">
               <thead></thead>
               <tbody>
+                <tr>
+                  <td>Country</td>
+                  <td>{country.name}</td>
+                </tr>
                 <tr>
                   <td style={{width: '30%'}}>Capital</td>
                   <td>{country.capital}</td>

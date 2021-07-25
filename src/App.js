@@ -11,6 +11,7 @@ export default function App() {
 
   const [countries, setCountries] = useState([])
   const [loading, setLoading] = useState(true)
+  const [activeCountryCode, setActiveCountryCode] = useState('')
 
   useEffect(() => {
     api.get('/all').then(res => {
@@ -29,11 +30,11 @@ export default function App() {
       <div className="container">
         <div className="row">
           <div className="col-5" style={{maxHeight: '90vh', overflow: 'scroll'}}>
-            <CountryList countries={countries} />
+            <CountryList activeCountryCode={activeCountryCode} countries={countries} />
           </div>
           <div className="col-7">
             <Route path='/:code'>
-              <CountryDetails />
+              <CountryDetails setActiveCountryCode={setActiveCountryCode} />
             </Route>
           </div>
         </div>
