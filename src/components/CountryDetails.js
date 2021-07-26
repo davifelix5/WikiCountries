@@ -37,17 +37,13 @@ export default function CountryDetails({ setActiveCountryCode }) {
 
   return (
     <>
-      <h1>{country.name.common}</h1>
+      <h1>{country.name}</h1>
             <table className="table">
               <thead></thead>
               <tbody>
                 <tr>
-                  <td>Country</td>
-                  <td>{country.name}</td>
-                </tr>
-                <tr>
                   <td style={{width: '30%'}}>Capital</td>
-                  <td>{country.capital}</td>
+                  <td>{country.capital || 'No capital'}</td>
                 </tr>
                 <tr>
                   <td>Area</td>
