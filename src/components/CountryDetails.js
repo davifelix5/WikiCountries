@@ -17,14 +17,15 @@ class CountryDetails extends React.Component {
   }
 
   async fetchData() {
-    const countryRes = await api.get(`/alpha/${this.state.code}`)
-    const country = countryRes.data
-    const borders = []
 
     this.setState({
       loading: true,
     })
     this.props.setActiveCountryCode(this.state.code)
+
+    const countryRes = await api.get(`/alpha/${this.state.code}`)
+    const country = countryRes.data
+    const borders = []
     
     for (let border of country.borders) {
       const res = await api.get(`/alpha/${border}`)
